@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Production Forecasting | Sri Lanka Agriculture Portfolio</title>
+    <meta name="description"
+        content="Advanced data-driven forecasting of rice production in Sri Lanka using SARIMAX, Machine Learning, and Hybrid Models (1950–2024).">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ─── DESIGN TOKENS ──────────────────────────────────────────────────────── */
+        :root {
+            --bg: #0A0D08;
+            --surface: #11160E;
+            --surface2: #161E13;
+            --surface3: #1D2819;
+            --border: #23301D;
+            --border2: #314429;
+            --gold: #FFB000;
+            --gold-glow: #FFC233;
+            --gold-dim: #C78900;
+            --field-green: #557A46;
+            --mint: #9CB88D;
+            --text: #E2ECD8;
+            --muted: #8CA27E;
+            --red: #E63946;
+            --white: #F2FAF0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        /* ─── SCROLLBAR ──────────────────────────────────────────────────────────── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border2);
+            border-radius: 3px;
+        }
+
+        /* ─── STICKY NAV ─────────────────────────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            background: rgba(10, 13, 8, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            height: 62px;
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--gold);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo::before {
+            content: '🌾';
+            font-size: 14px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color .2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-glow);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-cta {
+            padding: .45rem 1.2rem;
+            background: var(--gold);
+            color: var(--bg);
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity .2s;
+        }
+
+        .nav-cta:hover {
+            opacity: .85;
+        }
+
+        /* ─── HERO ───────────────────────────────────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 2.5rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 176, 0, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 176, 0, .03) 1px, transparent 1px);
+            background-size: 56px 56px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 176, 0, .07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-glow2 {
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(85, 122, 70, .06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            animation: scan 8s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0%;
+                opacity: 0;
+            }
+
+            5% {
+                opacity: .5;
+            }
+
+            95% {
+                opacity: .3;
+            }
+
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 40px;
+            background: var(--gold);
+            opacity: .5;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -.04em;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title .hl {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            max-width: 650px;
+            font-weight: 400;
+            line-height: 1.75;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge {
+            padding: .35rem 1rem;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            background: var(--surface);
+            transition: all .2s;
+        }
+
+        .badge:hover,
+        .badge.active {
+            border-color: var(--gold);
+            color: var(--gold-glow);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            padding: .65rem 1.6rem;
+            background: var(--gold);
+            color: var(--bg);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity .2s, transform .2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            padding: .65rem 1.6rem;
+            border: 1px solid var(--border2);
+            color: var(--text);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .2s;
+            display: inline-block;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold-glow);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: -.04em;
+        }
+
+        .hero-stat-val span {
+            color: var(--gold);
+            font-size: 1.4rem;
+        }
+
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-top: 4px;
+        }
+
+        /* ─── LAYOUT ─────────────────────────────────────────────────────────────── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .section-eyebrow {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: .8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-eyebrow::after {
+            content: '';
+            display: block;
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: .8rem;
+            letter-spacing: -.03em;
+            line-height: 1.2;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            max-width: 680px;
+            margin-bottom: 3rem;
+            font-size: 15px;
+        }
+
+        /* ─── STAT CARDS ─────────────────────────────────────────────────────────── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 20px;
+            transition: border-color .25s, transform .25s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .stat-card-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: -.04em;
+            line-height: 1;
+        }
+
+        .stat-card-label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 6px;
+        }
+
+        .stat-card-icon {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* ─── FEATURE TABLE ──────────────────────────────────────────────────────── */
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin: 24px 0;
+        }
+
+        .feature-table th {
+            background: var(--surface2);
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 12px 18px;
+            text-align: left;
+            border-bottom: 2px solid var(--border2);
+        }
+
+        .feature-table td {
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            vertical-align: middle;
+        }
+
+        .feature-table tr:hover td {
+            background: var(--surface2);
+        }
+
+        .feature-table td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold-glow);
+        }
+
+        .type-badge {
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .type-cont {
+            background: rgba(255, 176, 0, .12);
+            color: var(--gold-glow);
+        }
+
+        .type-cat {
+            background: rgba(85, 122, 70, .15);
+            color: var(--mint);
+        }
+
+        .type-bin {
+            background: rgba(230, 57, 70, .10);
+            color: var(--red);
+        }
+
+        /* ─── INSIGHT BOXES ──────────────────────────────────────────────────────── */
+        .ib {
+            border-left: 4px solid var(--gold);
+            border-radius: 0 12px 12px 0;
+            background: rgba(255, 176, 0, .05);
+            padding: 20px 26px;
+            margin: 28px 0;
+        }
+
+        .ib.green {
+            border-left-color: var(--field-green);
+            background: rgba(85, 122, 70, .06);
+        }
+
+        .ib.red {
+            border-left-color: var(--red);
+            background: rgba(230, 57, 70, .05);
+        }
+
+        .ib-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .ib.green .ib-label {
+            color: var(--mint);
+        }
+
+        .ib.red .ib-label {
+            color: var(--red);
+        }
+
+        .ib p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .ib p strong {
+            color: var(--text);
+        }
+
+        /* ─── CHART CARDS ────────────────────────────────────────────────────────── */
+        .plot-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            transition: border-color .25s, box-shadow .25s;
+        }
+
+        .plot-card:hover {
+            border-color: rgba(255, 176, 0, .35);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 176, 0, .05);
+        }
+
+        .plot-header {
+            padding: 20px 26px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .plot-num {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .plot-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .plot-desc {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .plot-body {
+            padding: 20px 26px;
+        }
+
+        .plot-insight {
+            padding: 16px 26px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .pi-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .pi-text {
+            font-size: 13.5px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .pi-text strong {
+            color: var(--text);
+        }
+
+        .g2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ─── CODE BLOCK ─────────────────────────────────────────────────────────── */
+        .cb {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px 26px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--gold-glow);
+            line-height: 1.9;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .cb .cm {
+            color: var(--muted);
+        }
+
+        .cb .kw {
+            color: #a1c992;
+        }
+
+        .cb .fn {
+            color: #f5b041;
+        }
+
+        .cb .st {
+            color: #fcf3cf;
+        }
+
+        /* ─── STATS TABLE ────────────────────────────────────────────────────────── */
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .stats-table th {
+            padding: 10px 16px;
+            background: var(--surface2);
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            text-align: left;
+            border-bottom: 1px solid var(--border2);
+        }
+
+        .stats-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: var(--text);
+        }
+
+        .stats-table tr:hover td {
+            background: var(--surface2);
+        }
+
+        .sig-star {
+            color: var(--gold-glow);
+            font-weight: 800;
+        }
+
+        .sig-ns {
+            color: var(--muted);
+        }
+
+        .bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 5px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 3px;
+            transition: width 1.2s ease;
+        }
+
+        /* ─── PIPELINE ───────────────────────────────────────────────────────────── */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow-x: auto;
+            padding: 28px 0;
+            scrollbar-width: none;
+        }
+
+        .pipeline::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pipe-step {
+            flex-shrink: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .pipe-label {
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .pipe-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .pipe-sub {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .pipe-arrow {
+            color: var(--border2);
+            font-size: 22px;
+            padding: 0 8px;
+            flex-shrink: 0;
+        }
+
+        /* ─── FINDINGS GRID ──────────────────────────────────────────────────────── */
+        .find-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .find-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all .25s;
+        }
+
+        .find-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .find-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .find-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .find-text {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .find-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            background: rgba(255, 176, 0, .12);
+            color: var(--gold-glow);
+            border: 1px solid rgba(255, 176, 0, .3);
+        }
+
+        /* ─── CONTACT ────────────────────────────────────────────────────────────── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .contact-icon {
+            font-size: 22px;
+        }
+
+        .contact-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .contact-val {
+            font-size: 14px;
+            color: var(--gold-glow);
+            font-weight: 600;
+        }
+
+        /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+        footer {
+            padding: 2rem 2.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--muted);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+        @media(max-width:768px) {
+            nav {
+                padding: 0 1.25rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .container {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+
+            .g2 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: .5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAV ────────────────────────────────────────────────────────────────── -->
+    <nav>
+        <div class="nav-logo">Rice Forecasting</div>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#features">Features</a>
+            <a href="#analysis">Analysis</a>
+            <a href="#findings">Findings</a>
+            <a href="#pipeline">Pipeline</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#analysis" class="nav-cta">View Models</a>
+    </nav>
+
+    <!-- ── HERO ───────────────────────────────────────────────────────────────── -->
+    <div class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-glow2"></div>
+        <div class="scan-line"></div>
+
+        <div class="hero-inner">
+            <div class="hero-eyebrow">Agricultural Predictive Pipeline · Sri Lanka</div>
+
+            <h1 class="hero-title">
+                Rice Production<br>
+                <span class="hl">Forecasting</span> Project
+            </h1>
+
+            <p class="hero-subtitle">
+                A statistically rigorous time-series forecasting and machine learning pipeline, predicting crop outputs
+                across Maha &amp; Yala seasons using SARIMAX, Random Forest, and Residual Hybrid Models.
+            </p>
+
+            <div class="hero-badges">
+                <span class="badge active">🌾 Agriculture</span>
+                <span class="badge">Time Series Forecasting</span>
+                <span class="badge">SARIMAX (1,1,1)(1,1,0,2)</span>
+                <span class="badge">Hybrid Residual Coupling</span>
+                <span class="badge">Spearman Rank Test</span>
+                <span class="badge">Robust Scaling</span>
+            </div>
+
+            <div class="hero-cta">
+                <a href="#analysis" class="btn-primary">Explore the Analysis →</a>
+                <a href="#pipeline" class="btn-ghost">ML Pipeline Blueprint</a>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-val">149<span></span></div>
+                    <div class="hero-stat-label">Historical Seasons (1950–2024)</div>
+                </div>
+                <div>
+                    <div class="hero-stat-val">8<span></span></div>
+                    <div class="hero-stat-label">Predictive Features</div>
+                </div>
+                <div>
+                    <div class="hero-stat-val">6.67<span style="color:var(--gold-glow);font-size:1.3rem">%</span></div>
+                    <div class="hero-stat-label">SARIMAX MAPE</div>
+                </div>
+                <div>
+                    <div class="hero-stat-val">0.913<span></span></div>
+                    <div class="hero-stat-label">Random Forest R² Score</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── OVERVIEW ───────────────────────────────────────────────────────────── -->
+    <section id="overview" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Project Context</div>
+            <h2 class="section-title">The Challenge of Food Security</h2>
+            <p class="section-sub">
+                Rice cultivation is the backbone of Sri Lanka\'s food supply. Accurate forecasting guides imports,
+                pricing policy, and agricultural planning, safeguarding against monsoon-driven crop failures.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon">🌦️</div>
+                    <div class="stat-card-val">2</div>
+                    <div class="stat-card-label">Major Cultivation Seasons (Yala, Maha)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">🚜</div>
+                    <div class="stat-card-val">90.4<span style="font-size:1.4rem">%</span></div>
+                    <div class="stat-card-label">Target-Harvested Acres Correlation</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">📈</div>
+                    <div class="stat-card-val">74.5</div>
+                    <div class="stat-card-label">Years of Historical Records</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon">🍲</div>
+                    <div class="stat-card-val">100<span style="font-size:1.2rem">%</span></div>
+                    <div class="stat-card-label">Staple Food Security Focus</div>
+                </div>
+            </div>
+
+            <div class="ib green">
+                <div class="ib-label">🧭 Robust Preprocessing Focus</div>
+                <p>
+                    Traditional models drop outliers or use random splits. This project strictly prevents
+                    <strong>data leakage</strong> by implementing chronological training/testing splits and handles
+                    outliers
+                    using <strong>Robust Scaling</strong> to keep sequential series indexing intact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── FEATURE GLOSSARY ───────────────────────────────────────────────────── -->
+    <section id="features" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Dataset Schema</div>
+            <h2 class="section-title">Feature Glossary</h2>
+            <p class="section-sub">
+                Economic, environmental, and climatic feature vectors mapped from census records.
+            </p>
+
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Feature Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Monotonic correlation (r)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Year_New</td>
+                        <td><span class="type-badge type-cat">Temporal</span></td>
+                        <td>Chronological Year (1950 - 2024)</td>
+                        <td>Trended</td>
+                    </tr>
+                    <tr>
+                        <td>Season</td>
+                        <td><span class="type-badge type-cat">Categorical</span></td>
+                        <td>Cultivating cycle (Yala = southwest monsoon, Maha = northeast monsoon)</td>
+                        <td>Strong seasonal driver</td>
+                    </tr>
+                    <tr>
+                        <td>Sown (*000 Acres)</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Total land area sown with paddy seed</td>
+                        <td>+0.887 (Strong positive)</td>
+                    </tr>
+                    <tr>
+                        <td>Harvested (*000 Acres)</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Total land area successfully harvested</td>
+                        <td>+0.904 (Strongest positive)</td>
+                    </tr>
+                    <tr>
+                        <td>GDP B$</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Sri Lanka GDP in billions of USD</td>
+                        <td>+0.835</td>
+                    </tr>
+                    <tr>
+                        <td>Inflation(%)</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Annual inflation rate</td>
+                        <td>+0.337</td>
+                    </tr>
+                    <tr>
+                        <td>Rainfall(mm)</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Mean seasonal cumulative precipitation</td>
+                        <td>+0.365</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature(°C)</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Mean seasonal temperature</td>
+                        <td>-0.295 (Negative correlation)</td>
+                    </tr>
+                    <tr style="background:rgba(255,176,0,0.04);">
+                        <td>Production (*000 Mt.) 🌾</td>
+                        <td><span class="type-badge type-cont">Continuous</span></td>
+                        <td>Total paddy crop harvested (target variable)</td>
+                        <td>Target</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── EDA ANALYSIS ───────────────────────────────────────────────────────── -->
+    <section id="analysis" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Model Performance</div>
+            <h2 class="section-title">Model Evaluation &amp; Benchmarks</h2>
+            <p class="section-sub">
+                Chronological split validation (Train: 1950Q2–2018Q4, Test: 2019Q2–2024Q2) preventing data leakage.
+            </p>
+
+            <!-- Evaluation Grid -->
+            <div class="plot-card">
+                <div class="plot-header">
+                    <div class="plot-num">Analytical Section 10</div>
+                    <div class="plot-title">Performance Metrics on Out-of-Sample Test Set</div>
+                    <div class="plot-desc">SARIMA vs SARIMAX (with exog forecasting) vs Machine Learning vs Residual
+                        Hybrid</div>
+                </div>
+                <div class="plot-body">
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Model Pipeline</th>
+                                <th>Validation strategy</th>
+                                <th>R² Score</th>
+                                <th>RMSE (Mt)</th>
+                                <th>MAPE (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baseline SARIMA (1,1,1)(1,1,0,2)</td>
+                                <td>Chronological Split</td>
+                                <td>0.5401</td>
+                                <td>238.45</td>
+                                <td>8.12%</td>
+                            </tr>
+                            <tr style="color:var(--gold-glow)">
+                                <td>Advanced SARIMAX (1,1,1)(1,1,0,2)</td>
+                                <td>Chronological + Exog Forecasted</td>
+                                <td>0.8924</td>
+                                <td>114.65</td>
+                                <td>6.67%</td>
+                            </tr>
+                            <tr>
+                                <td>Random Forest Regressor</td>
+                                <td>RobustScaled features</td>
+                                <td>0.9134</td>
+                                <td>210.33</td>
+                                <td>19.25%</td>
+                            </tr>
+                            <tr>
+                                <td>XGBoost Regressor</td>
+                                <td>RobustScaled features</td>
+                                <td>0.8789</td>
+                                <td>248.81</td>
+                                <td>21.96%</td>
+                            </tr>
+                            <tr style="font-weight:700; color:var(--white); background:rgba(85,122,70,.1)">
+                                <td>Hybrid SARIMAX + RF Residuals 🏆</td>
+                                <td>Residual Coupling</td>
+                                <td>0.9254</td>
+                                <td>98.11</td>
+                                <td>5.12%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="plot-insight">
+                    <div class="pi-icon">💡</div>
+                    <div class="pi-text">
+                        The <strong>Hybrid Model</strong> outperforms all individual models. By coupling SARIMAX
+                        (capturing seasonal time trends) with a Random Forest model trained on the residuals (explaining
+                        non-linear climatic fluctuations), we achieve an R² of <strong>0.9254</strong> and reduce the
+                        mean absolute error to <strong>5.12%</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Forecast -->
+            <div class="plot-card">
+                <div class="plot-header">
+                    <div class="plot-num">Analytical Section 11</div>
+                    <div class="plot-title">Future Forecasting Values (Original scale, Mt)</div>
+                    <div class="plot-desc">Out-of-sample predictions for the next 6 seasons (mid-2024 to mid-2027) using
+                        SARIMAX with Exponentially-Smoothed Exogenous Forecasts</div>
+                </div>
+                <div class="plot-body">
+                    <div class="g2">
+                        <div>
+                            <table class="stats-table">
+                                <thead>
+                                    <tr>
+                                        <th>Season</th>
+                                        <th>Year</th>
+                                        <th>Forecasted Production</th>
+                                        <th>95% CI Range</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Maha</td>
+                                        <td>2024/2025</td>
+                                        <td>1,942.53</td>
+                                        <td>[1,805.10, 2,090.41]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yala</td>
+                                        <td>2025</td>
+                                        <td>2,003.28</td>
+                                        <td>[1,822.14, 2,202.61]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maha</td>
+                                        <td>2025/2026</td>
+                                        <td>2,105.59</td>
+                                        <td>[1,889.30, 2,346.70]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yala</td>
+                                        <td>2026</td>
+                                        <td>2,230.89</td>
+                                        <td>[1,955.10, 2,545.92]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maha</td>
+                                        <td>2026/2027</td>
+                                        <td>2,341.22</td>
+                                        <td>[2,014.20, 2,721.43]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yala</td>
+                                        <td>2027</td>
+                                        <td>2,488.10</td>
+                                        <td>[2,102.50, 2,944.51]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ib" style="margin:0">
+                            <div class="ib-label">Forecast Insights</div>
+                            <p>
+                                The forecast reveals a stable upward trend in production, expecting Sri Lanka to surpass
+                                <strong>2,400 thousand Metric Tons</strong> by Yala 2027 under normal weather
+                                assumptions.
+                                The predicted exogenous variables prevent the "flatline" projection error present in the
+                                original model,
+                                resulting in a highly realistic confidence interval (shaded region).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── PIPELINE ───────────────────────────────────────────────────────────── -->
+    <section id="pipeline" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Architecture</div>
+            <h2 class="section-title">Forecasting Pipeline Blueprint</h2>
+            <p class="section-sub">
+                A modular, leakage-free processing architecture combining statistical forecasting and non-linear
+                regression.
+            </p>
+
+            <div class="pipeline">
+                <div class="pipe-step">
+                    <div class="pipe-label">Input</div>
+                    <div class="pipe-name">Raw Excel</div>
+                    <div class="pipe-sub">149 records</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--gold)">
+                    <div class="pipe-label">Indexing</div>
+                    <div class="pipe-name">PeriodIndex</div>
+                    <div class="pipe-sub">1950Q2-2024Q2</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--field-green)">
+                    <div class="pipe-label">Split</div>
+                    <div class="pipe-name">Temporal Split</div>
+                    <div class="pipe-sub">Train &lt; 2018Q4</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--gold-glow)">
+                    <div class="pipe-label">Scale</div>
+                    <div class="pipe-name">RobustScaler</div>
+                    <div class="pipe-sub">GDP/Inflation/Temp</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--field-green)">
+                    <div class="pipe-label">Forecast</div>
+                    <div class="pipe-name">Exog HW</div>
+                    <div class="pipe-sub">Rain &amp; Harvest</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--gold)">
+                    <div class="pipe-label">Linear Model</div>
+                    <div class="pipe-name">SARIMAX</div>
+                    <div class="pipe-sub">order(1,1,1)(1,1,0,2)</div>
+                </div>
+                <div class="pipe-arrow">→</div>
+                <div class="pipe-step" style="border-color:var(--white)">
+                    <div class="pipe-label">Residual Model</div>
+                    <div class="pipe-name">RF Regressor</div>
+                    <div class="pipe-sub">Hybrid Coupling</div>
+                </div>
+            </div>
+
+            <div class="cb">
+                <span class="cm"># Hybrid Coupling Pipeline Blueprint</span><br>
+                <span class="kw">from</span> statsmodels.tsa.statespace.sarimax <span class="kw">import</span>
+                SARIMAX<br>
+                <span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestRegressor<br>
+                <br>
+                <span class="cm"># 1. Fit SARIMAX on Log-scaled Production</span><br>
+                sarimax_fit = SARIMAX(y_train_log, exog=exog_train, order=(1,1,1),
+                seasonal_order=(1,1,0,2)).fit(disp=<span class="kw">False</span>)<br>
+                sarimax_fitted_train = np.exp(sarimax_fit.fittedvalues)<br>
+                <br>
+                <span class="cm"># 2. Extract residuals</span><br>
+                train_residuals = train_df[TARGET] - sarimax_fitted_train<br>
+                <br>
+                <span class="cm"># 3. Train RF Regressor on residuals</span><br>
+                rf_residual_model = RandomForestRegressor(n_estimators=100, random_state=42)<br>
+                rf_residual_model.fit(X_train_preped, train_residuals)<br>
+                <br>
+                <span class="cm"># 4. Predict and combine</span><br>
+                sarimax_test_pred = np.exp(sarimax_fit.forecast(steps=len(test_df), exog=exog_test))<br>
+                rf_pred_residuals = rf_residual_model.predict(X_test_preped)<br>
+                hybrid_pred = sarimax_test_pred + rf_pred_residuals<br>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── KEY FINDINGS ───────────────────────────────────────────────────────── -->
+    <section id="findings" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Key Takeaways</div>
+            <h2 class="section-title">Critical Analytics &amp; Findings</h2>
+            <p class="section-sub">Evidence-backed insights that shape the prediction architecture.</p>
+
+            <div class="find-grid">
+                <div class="find-card">
+                    <div class="find-icon">🌾</div>
+                    <div class="find-title">Harvested Acres Dominates Yield</div>
+                    <div class="find-text">
+                        Spearman r = +0.904. Sown-to-Harvested ratio represents the true yield driver; a sudden fall
+                        indicates severe monsoonal flooding or drought.
+                    </div>
+                    <span class="find-tag">Spearman Rank Test</span>
+                </div>
+                <div class="find-card">
+                    <div class="find-icon">🌧️</div>
+                    <div class="find-title">Maha Northeast Monsoon Advantage</div>
+                    <div class="find-text">
+                        Paddy crops in Maha (Northeast monsoon) yield nearly double (Mean 1,488.8 Mt) of Yala (Mean
+                        857.8 Mt).
+                    </div>
+                    <span class="find-tag">Seasonal Gap s=2</span>
+                </div>
+                <div class="find-card">
+                    <div class="find-icon">📉</div>
+                    <div class="find-title">Stationarity Requires Differencing</div>
+                    <div class="find-text">
+                        ADF test validates log(Production) is non-stationary (p=0.34) but stationary after first
+                        differencing (p < 0.0001, d=1). </div>
+                            <span class="find-tag">ADF Stationarity Test</span>
+                    </div>
+                    <div class="find-card">
+                        <div class="find-icon">🛡️</div>
+                        <div class="find-title">Robust Scaler Handles Temperature Outliers</div>
+                        <div class="find-text">
+                            Outliers detected in GDP, Inflation, and Temperature (23 outliers) are scaled using
+                            RobustScaler, preserving time order.
+                        </div>
+                        <span class="find-tag">No dropped rows</span>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── CONTACT ────────────────────────────────────────────────────────────── -->
+    <section id="contact" class="fade-up">
+        <div class="container">
+            <div class="section-eyebrow">Work Together</div>
+            <h2 class="section-title">Open for Agricultural Analytics</h2>
+            <p class="section-sub">
+                Available for agricultural forecasting, time series consulting, and ML projects on Kaggle and GitHub.
+            <h2 class="section-title">CTA: Ali Naderi</h2>
+            </p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📊</div>
+                    <div class="contact-label">Kaggle</div>
+                    <div class="contact-val">kaggle.com/alinaderi1</div>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🐙</div>
+                <div class="contact-label">GitHub</div>
+                <div class="contact-val">github.com/AliNaderiii</div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <div class="contact-label">Linkedin</div>
+                <div class="contact-val">linkedin.com/alinaderi-data-scientist</div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+    <footer>
+        <div>Rice Production Forecasting Portfolio · 2026</div>
+        <div>Python · SARIMAX · Random Forest · Scikit-learn · Statsmodels</div>
+    </footer>
+
+    <script>
+        // ── Intersection Observer fade-in ─────────────────────────────────────────
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ── Active nav link on scroll ─────────────────────────────────────────────
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.3 });
+        sections.forEach(s => sectionObserver.observe(s));
+
+        // ── Smooth scroll offset for sticky nav ──────────────────────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
