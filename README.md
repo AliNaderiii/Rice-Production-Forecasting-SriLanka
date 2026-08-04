@@ -18,6 +18,7 @@ Chronological validation. Train 1950Q2 to 2018Q4, test 2019Q2 to 2024Q2. No rand
 | Random Forest | RobustScaled features | 0.9134 | 210.33 | 19.25% |
 | XGBoost | RobustScaled features | 0.8789 | 248.81 | 21.96% |
 | **Hybrid SARIMAX + RF residuals** | Residual coupling | **0.9254** | **98.11** | **5.12%** |
+
 **Reading the table.** Random Forest posts a respectable R2 of 0.9134 but a MAPE of 19.25%, nearly four times the hybrid. R2 rewards explaining variance across the whole series; MAPE penalises being wrong on individual seasons. A model can score well on one and badly on the other, which is why both are reported.
 The hybrid wins because the two components fail in different places. SARIMAX handles the seasonal structure but cannot model non-linear climate effects. Random Forest captures those effects but has no notion of temporal ordering. Fitting RF to SARIMAX residuals lets each do what it is good at.
 ## Forecasts
@@ -30,6 +31,7 @@ Six seasons ahead, generated with SARIMAX using exponentially smoothed exogenous
 | Yala | 2026 | 2,230.89 | 1,955.10 - 2,545.92 |
 | Maha | 2026/2027 | 2,341.22 | 2,014.20 - 2,721.43 |
 | Yala | 2027 | 2,488.10 | 2,102.50 - 2,944.51 |
+
 Production is projected to exceed 2,400 thousand metric tons by Yala 2027 under normal weather assumptions. Forecasting the exogenous variables rather than holding them constant avoids the flatline projection error present in the baseline model, and widens the confidence intervals to something realistic.
 ## Dataset
 | Property | Value |
@@ -38,7 +40,9 @@ Production is projected to exceed 2,400 thousand metric tons by Yala 2027 under 
 | Period | 1950 to 2024, seasonal (Yala and Maha) |
 | Records | 149 seasons |
 | Target | Rice production (000 Mt) |
+
 **Features**
+
 | Feature | Type | Monotonic correlation |
 | :--- | :--- | :--- |
 | Harvested acres | Continuous | +0.904 |
