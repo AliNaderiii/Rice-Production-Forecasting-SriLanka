@@ -1,115 +1,113 @@
-# Rice Production Forecasting in Sri Lanka
-Time series and machine learning forecasting of paddy production across the Yala and Maha seasons, 1950 to 2024.
-[![Live Dashboard](https://img.shields.io/badge/Live_Dashboard-E85D4A?style=for-the-badge&logo=googlechrome&logoColor=white)](https://alinaderiii.github.io/Rice-Production-Forecasting-SriLanka/)
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![statsmodels](https://img.shields.io/badge/statsmodels-0.14-4051B5?style=for-the-badge)](https://www.statsmodels.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-### [Open the interactive dashboard](https://alinaderiii.github.io/Rice-Production-Forecasting-SriLanka/)
-## Overview
-Rice is the staple crop of Sri Lanka. Accurate production forecasts inform import planning, price policy and food security decisions, and the country is exposed to monsoon-driven volatility across two distinct growing seasons.
-This project combines classical time series analysis with machine learning, then couples the two: SARIMAX captures trend and seasonality, and a Random Forest learns the structure remaining in the residuals.
-**Best model: Hybrid SARIMAX + Random Forest residuals, R2 = 0.9254, MAPE = 5.12%**
-## Results
-Chronological validation. Train 1950Q2 to 2018Q4, test 2019Q2 to 2024Q2. No random shuffling at any point.
-| Model | Validation strategy | R2 | RMSE (Mt) | MAPE |
-| :--- | :--- | ---: | ---: | ---: |
-| SARIMA baseline (1,1,1)(1,1,0,2) | Chronological split | 0.5401 | 238.45 | 8.12% |
-| SARIMAX with exogenous forecasts | Chronological + forecast exog | 0.8924 | 114.65 | 6.67% |
-| Random Forest | RobustScaled features | 0.9134 | 210.33 | 19.25% |
-| XGBoost | RobustScaled features | 0.8789 | 248.81 | 21.96% |
-| **Hybrid SARIMAX + RF residuals** | Residual coupling | **0.9254** | **98.11** | **5.12%** |
+# Sri Lanka Rice Production Forecasting
 
-**Reading the table.** Random Forest posts a respectable R2 of 0.9134 but a MAPE of 19.25%, nearly four times the hybrid. R2 rewards explaining variance across the whole series; MAPE penalises being wrong on individual seasons. A model can score well on one and badly on the other, which is why both are reported.
-The hybrid wins because the two components fail in different places. SARIMAX handles the seasonal structure but cannot model non-linear climate effects. Random Forest captures those effects but has no notion of temporal ordering. Fitting RF to SARIMAX residuals lets each do what it is good at.
-## Forecasts
-Six seasons ahead, generated with SARIMAX using exponentially smoothed exogenous forecasts.
-| Season | Year | Forecast (000 Mt) | 95% CI |
-| :--- | :--- | ---: | :--- |
-| Maha | 2024/2025 | 1,942.53 | 1,805.10 - 2,090.41 |
-| Yala | 2025 | 2,003.28 | 1,822.14 - 2,202.61 |
-| Maha | 2025/2026 | 2,105.59 | 1,889.30 - 2,346.70 |
-| Yala | 2026 | 2,230.89 | 1,955.10 - 2,545.92 |
-| Maha | 2026/2027 | 2,341.22 | 2,014.20 - 2,721.43 |
-| Yala | 2027 | 2,488.10 | 2,102.50 - 2,944.51 |
+An auditable, leakage-aware benchmark for seasonal rice production in Sri Lanka. The current reference pipeline compares seasonal naive, univariate SARIMAX, direct Random Forest, and SARIMAX with rolling-origin residual correction.
 
-Production is projected to exceed 2,400 thousand metric tons by Yala 2027 under normal weather assumptions. Forecasting the exogenous variables rather than holding them constant avoids the flatline projection error present in the baseline model, and widens the confidence intervals to something realistic.
-## Dataset
-| Property | Value |
-| :--- | :--- |
-| Sources | Department of Census and Statistics, Department of Meteorology, Central Bank of Sri Lanka |
-| Period | 1950 to 2024, seasonal (Yala and Maha) |
-| Records | 149 seasons |
-| Target | Rice production (000 Mt) |
+> **Results note:** Earlier repository and LinkedIn materials reported a single hybrid score (`R² = 0.9254`, `MAPE = 5.12%`). Those figures are not reproduced by the original saved modeling notebook. They are not used as current results here. The current benchmark below is generated from the checked-in code and workbook. It does **not** establish that the hybrid is universally best or that its residual correction identifies climate shocks.
 
-**Features**
+## Current benchmark
 
-| Feature | Type | Monotonic correlation |
-| :--- | :--- | :--- |
-| Harvested acres | Continuous | +0.904 |
-| Sown acres | Continuous | +0.887 |
-| GDP (billion USD) | Continuous | +0.835 |
-| Rainfall (mm) | Continuous | +0.365 |
-| Inflation (%) | Continuous | +0.337 |
-| Temperature (C) | Continuous | -0.295 |
-| Season | Categorical | Strong seasonal driver |
-## Methodology
-**Stationarity.** ADF testing confirms log(production) is non-stationary (p = 0.34) but stationary after first differencing (p < 0.0001), giving d = 1.
-**Outliers kept, not dropped.** GDP, inflation and temperature contain 23 outliers between them. Rather than removing rows and breaking the time index, features are scaled with RobustScaler, which is insensitive to extreme values.
-**Leakage prevention.** The train/test boundary is chronological, never random. Exogenous variables for the test period are forecast, not taken from actuals, so the model never sees future information.
-**Seasonal structure.** Maha (northeast monsoon) yields nearly double Yala: mean 1,488.8 Mt against 857.8 Mt. Seasonal period s = 2.
-## Repository contents
-| File | Description |
-| :--- | :--- |
-| [Live dashboard](https://alinaderiii.github.io/Rice-Production-Forecasting-SriLanka/) | Interactive summary of the full analysis |
-| [Rice_Production_Advanced_EDA.ipynb](Rice_Production_Advanced_EDA.ipynb) | Exploratory analysis, stationarity testing, correlation |
-| [Rice_Production_Advanced_Modeling.ipynb](Rice_Production_Advanced_Modeling.ipynb) | SARIMAX, ML models, hybrid coupling, forecasts |
-| [EDA HTML render](https://alinaderiii.github.io/Rice-Production-Forecasting-SriLanka/Rice_Production_Advanced_EDA.html) | Read the EDA without running anything |
-| [Modeling HTML render](https://alinaderiii.github.io/Rice-Production-Forecasting-SriLanka/Rice_Production_Advanced_Modeling.html) | Read the modelling notebook in-browser |
-| rice new one.xlsx | Source dataset |
-## How to run
+Run configuration: 149 seasonal observations; expanding training window with at least 80 observations; 33 forecast origins; horizons 1–6 seasons; origins advance by two observations, with the last eligible origin included. All models use the same origins. Predictors are limited to past production and the known future season; realized future weather, acreage, and economic values are excluded.
+
+The table reports **MAE (WAPE)** for each horizon. MAE is in the workbook's target units: thousand metric tonnes. Lower is better.
+
+| Horizon | Seasonal naive | SARIMAX | Direct RF (lags) | SARIMAX + RF residual |
+|---:|---:|---:|---:|---:|
+| 1 | 303.4 (23.90%) | 252.3 (19.87%) | 246.4 (19.41%) | **245.4 (19.33%)** |
+| 2 | 335.8 (16.11%) | 333.7 (16.01%) | 390.0 (18.72%) | **328.8 (15.78%)** |
+| 3 | 264.5 (20.19%) | 254.0 (19.39%) | **234.0 (17.87%)** | 253.7 (19.37%) |
+| 4 | 376.7 (17.69%) | 402.7 (18.91%) | 374.9 (17.61%) | **370.1 (17.38%)** |
+| 5 | 260.2 (19.42%) | 285.6 (21.31%) | **252.5 (18.84%)** | 269.0 (20.08%) |
+| 6 | **326.8 (15.07%)** | 366.5 (16.90%) | 373.8 (17.24%) | 345.5 (15.93%) |
+
+The hybrid has the lowest MAE at three of the six horizons in this run, but it does not dominate at every horizon. These rolling-origin forecasts overlap, the dataset is small, and the evaluated years are not a separate prospective holdout. Treat the table as a reproducible benchmark—not proof of robust future superiority.
+
+The complete scores, including RMSE, MAPE, mean error, MASE, R², and SARIMAX interval coverage, are in [`outputs/backtest_summary.csv`](outputs/backtest_summary.csv). Forecast-level results are in [`outputs/backtest_predictions.csv`](outputs/backtest_predictions.csv). The static dashboard is [`index.html`](index.html).
+
+## Dataset and target
+
+- **Target:** `Production (*000  Mt.)`, rice production in thousand metric tonnes—not yield per unit area.
+- **Coverage:** 149 seasonal records, from Yala 1950 through Yala 2024. The final year contains a Yala record only.
+- **Season sequence:** Yala and Maha are treated as alternating observations.
+- **Workbook:** [`rice new one.xlsx`](rice%20new%20one.xlsx).
+
+The workbook includes acreage, GDP, inflation, rainfall, and temperature columns. They are **not predictors in the current reference backtest**: the file does not provide historical forecast-time vintages, issue-time weather forecasts, or publication-vintage metadata. Using realized future covariates would make a pre-season evaluation optimistic. See [`docs/data_dictionary.md`](docs/data_dictionary.md) before proposing an exogenous-variable model.
+
+The original project materials name national statistical, meteorological, and central-bank sources, but the workbook does not supply a source URL, retrieval date, revision history, or release vintage for each field. Verify and document these details before operational use.
+
+## Models and evaluation
+
+1. **Seasonal naive:** repeats the most recent observed value for the matching seasonal position.
+2. **SARIMAX:** log production, order `(1, 1, 1)`, seasonal order `(1, 1, 0, 2)`, with no exogenous inputs.
+3. **Direct RF (lags):** horizon-specific Random Forest using lagged production and the known target season.
+4. **SARIMAX + RF residual:** horizon-specific Random Forest learns historical expanding-window SARIMAX errors. For each outer origin, only residual targets already observed at that origin are eligible for training.
+
+The expanding-window evaluation has 33 origins per horizon. At every origin, model training uses only production observed by then. Exogenous actuals for the forecast period are not passed to the models. Model settings are fixed and conservative; no hyperparameter search is selected on the reported evaluation scores.
+
+MAE, RMSE, WAPE, MAPE, mean error, MASE, and R² are reported by horizon. MASE uses the seasonal-naive in-sample error at each origin. SARIMAX 95% interval coverage is also included. Because origins and horizons overlap, metrics across origins are correlated; the reported number of forecasts is not an independent sample size.
+
+The SARIMAX point forecast is lognormal-mean adjusted. Its interval is transformed from log space. No interval is presented for the hybrid because the SARIMAX interval alone would omit residual-model uncertainty.
+
+See [`docs/methodology.md`](docs/methodology.md) for the full protocol and caveats.
+
+## Reproduce the benchmark
+
+The checked-in benchmark outputs were generated on Windows with Python 3.11.9. Installed package versions are recorded in `outputs/run_metadata.json`. The project supports Python 3.10+; small numerical differences may occur across platforms and dependency versions. The CI workflow uses its pinned Python 3.13 environment. From the repository root:
+
+### Windows PowerShell
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+pytest
+ruff check src tests scripts
+python -m rice_forecasting.cli --data ".\rice new one.xlsx" --output ".\outputs" --max-horizon 6 --evaluation-start 80 --origin-step 2 --residual-training-start 50 --minimum-ml-samples 20
+python .\scripts\build_dashboard.py --summary .\outputs\backtest_summary.csv --output .\index.html
+```
+
+If PowerShell blocks environment activation, use `Set-ExecutionPolicy -Scope Process Bypass` in that PowerShell window, or call `.\.venv\Scripts\python.exe` directly.
+
+### macOS / Linux
+
 ```bash
-git clone https://github.com/AliNaderiii/Rice-Production-Forecasting-SriLanka.git
-cd Rice-Production-Forecasting-SriLanka
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+pytest
+ruff check src tests scripts
+python -m rice_forecasting.cli --data "rice new one.xlsx" --output outputs --max-horizon 6 --evaluation-start 80 --origin-step 2 --residual-training-start 50 --minimum-ml-samples 20
+python scripts/build_dashboard.py --summary outputs/backtest_summary.csv --output index.html
 ```
-```bash
-pip install pandas numpy statsmodels scikit-learn xgboost matplotlib seaborn plotly openpyxl jupyter
-jupyter notebook
+
+The full default backtest re-fits SARIMAX repeatedly and may take a few minutes on some machines. Use `--help` to view options. `run_metadata.json` records the run settings and input hash.
+
+## Repository layout
+
+```text
+src/rice_forecasting/   validated loader, model definitions, backtest, metrics, CLI
+scripts/                dashboard builder
+outputs/                reproducible prediction-level and summary CSVs
+tests/                   automated checks
+ docs/                   methodology, field definitions, release checklist
+ legacy/                 original notebooks, HTML exports, and report, preserved for provenance
 ```
-Start with `Rice_Production_Advanced_EDA.ipynb`, then `Rice_Production_Advanced_Modeling.ipynb`.
-## Hybrid model
-```python
-from statsmodels.tsa.statespace.sarimax import SARIMAX
-from sklearn.ensemble import RandomForestRegressor
-# 1. Fit SARIMAX on log-scaled production
-sarimax_fit = SARIMAX(
-    y_train_log, exog=exog_train,
-    order=(1, 1, 1), seasonal_order=(1, 1, 0, 2)
-).fit(disp=False)
-sarimax_fitted_train = np.exp(sarimax_fit.fittedvalues)
-# 2. Extract residuals
-train_residuals = train_df[TARGET] - sarimax_fitted_train
-# 3. Train RF on the residuals
-rf_residual_model = RandomForestRegressor(n_estimators=100, random_state=42)
-rf_residual_model.fit(X_train_preped, train_residuals)
-# 4. Combine
-sarimax_test_pred = np.exp(sarimax_fit.forecast(steps=len(test_df), exog=exog_test))
-rf_pred_residuals = rf_residual_model.predict(X_test_preped)
-hybrid_pred = sarimax_test_pred + rf_pred_residuals
-```
-## Tech stack
-| Layer | Tools |
-| :--- | :--- |
-| Time series | statsmodels (SARIMAX), Holt-Winters |
-| Machine learning | scikit-learn, XGBoost |
-| Data handling | pandas, NumPy, openpyxl |
-| Visualisation | Matplotlib, Seaborn, Plotly |
-## Limitations
-The test set covers six seasons. That is enough to compare models but too few to establish confidence in any single forecast. Sri Lankan agriculture over this period was also affected by the 2021 fertiliser import ban and the 2022 economic crisis, neither of which is captured by the exogenous variables used here. Treat the 2025 to 2027 projections as a baseline under normal conditions, not a prediction.
-## Attribution
-This project reimplements and extends the analysis from a report by Ashfaq M (KIC-HNDDS-241-F-007). The SARIMAX and Random Forest residual coupling, the leakage-free validation design, the exogenous forecasting approach and all code in this repository are my own work.
-Completed as a Higher National Diploma in Data Science project.
-## Author
-**Ali Naderi** - AI Research Engineer and Data Scientist, Dublin, Ireland
-[Portfolio](https://alinaderiii.github.io/) | [LinkedIn](https://www.linkedin.com/in/alinaderi-data-scientist) | [GitHub](https://github.com/AliNaderiii) | [Kaggle](https://www.kaggle.com/alinaderi1) | [alinaderi119@gmail.com](mailto:alinaderi119@gmail.com)
-## License
-Released under the [MIT License](LICENSE).
+
+The notebooks and HTML exports under `legacy/` are historical artifacts with previously saved outputs; they are not the authoritative source of current metrics. The root pipeline and its outputs are authoritative for this release.
+
+## Limitations and next steps
+
+- Only 149 seasonal observations are available; performance uncertainty is material.
+- The rolling backtest is retrospective and is not a separately held-out prospective test.
+- No causal attribution to climate shocks is made. Such a claim requires a documented shock definition, feature ablations, and evaluation by event period.
+- Climate, acreage, and economic regressors should be added only with a forecast-time availability policy and historical vintages or realistic proxy forecasts.
+- Future operational forecasts and hybrid prediction intervals are not released in this benchmark.
+
+Before publishing a model-performance claim, keep a final untouched time period, repeat the rolling-origin comparison, and report results by horizon and season. See [`docs/release_checklist.md`](docs/release_checklist.md).
+
+## Project and license
+
+**Project author:** Ali Naderi · [Portfolio](https://alinaderiii.github.io/) · [LinkedIn](https://www.linkedin.com/in/alinaderi-data-scientist) · [GitHub](https://github.com/AliNaderiii)
+
+Historical source materials are preserved in `legacy/`. This project is distributed under the [MIT License](LICENSE). Source-data licensing and attribution should be verified independently before redistribution.

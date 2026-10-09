@@ -1,0 +1,31 @@
+{
+  "pipeline_version": "1.0.0",
+  "dataset_path": "rice new one.xlsx",
+  "dataset_sha256": "98d3dcd9e0ebcf3b972bd051e0fa7ad14f7e903a3d142adb3042e9a110666874",
+  "python_version": "3.11.9",
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "openpyxl": "3.1.5"
+  },
+  "n_observations": 149,
+  "target": "Rice production (thousand metric tonnes)",
+  "config": {
+    "max_horizon": 6,
+    "evaluation_start": 80,
+    "origin_step": 2,
+    "residual_training_start": 50,
+    "minimum_ml_samples": 20
+  },
+  "prediction_file": "outputs\\backtest_predictions.csv",
+  "summary_file": "outputs\\backtest_summary.csv",
+  "models": [
+    "Direct RF (lags)",
+    "SARIMAX",
+    "SARIMAX + RF residual",
+    "Seasonal naive"
+  ],
+  "note": "Historical realized exogenous features are excluded from forecast predictors."
+}
