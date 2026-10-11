@@ -1,0 +1,4 @@
+scenario,model,n_forecasts,mae,rmse,mape_pct,r2,evaluation_start_index,note
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),69,245.715734,293.136826,15.567159,0.786284,80,Exploratory expanding-origin evaluation; same-season actual covariates; not a pre-season forecast.
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),69,231.646022,290.470827,13.475792,0.790154,80,Exploratory expanding-origin evaluation; same-season actual covariates; not a pre-season forecast.
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),69,271.266438,356.969038,14.448208,0.683075,80,Exploratory expanding-origin evaluation; same-season actual covariates; not a pre-season forecast.

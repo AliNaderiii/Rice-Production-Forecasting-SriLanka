@@ -83,6 +83,37 @@ python scripts/build_dashboard.py --summary outputs/backtest_summary.csv --outpu
 
 The full default backtest re-fits SARIMAX repeatedly and may take a few minutes on some machines. Use `--help` to view options. `run_metadata.json` records the run settings and input hash.
 
+## Extended benchmark: ETS, Theta, and Ridge
+
+A second leakage-aware rolling-origin benchmark adds damped-trend seasonal ETS, seasonal Theta, and direct Ridge regression on log production. It reuses the reference forecast origins and horizons and produces CSV predictions, horizon-level metrics, and publication-quality PNG figures. The current run favors ETS descriptively across all six horizons; this retrospective result is a candidate for confirmation, not a guarantee of future performance.
+
+Install the project and run from the repository root:
+
+```powershell
+python -m pip install -e ".[dev]"
+python scripts/advanced_benchmark.py --data "rice new one.xlsx" --reference-predictions outputs/backtest_predictions.csv --output outputs/advanced --evaluation-start 80 --origin-step 2 --max-horizon 6
+```
+
+Results are written under `outputs/advanced/`. The Persian research review and limitations are in [`docs/research_upgrade_report_fa.md`](docs/research_upgrade_report_fa.md).
+
+### Prequential uncertainty diagnostics
+
+A horizon-specific conformal calibration script uses only historical forecast errors whose outcomes were observable at each origin. Its interval coverage in the current retrospective test falls below the nominal 90% level, so these intervals are diagnostic and are **not** ready for operational use.
+
+```powershell
+python scripts/conformal_intervals.py --coverage 0.9 --min-calibration 10
+```
+
+The calibrated predictions, horizon summary, and coverage/width figure are saved to `outputs/advanced/`.
+
+### Separate post-season nowcast experiment
+
+The scenario benchmark evaluates an expanding-origin regression using realized same-season acreage, weather, and macroeconomic fields. By definition these predictors are not available for a pre-season forecast; this result is labeled a within-season/post-season nowcast. The code also keeps target production out of the feature set. Outputs are written to `outputs/scenarios/`.
+
+```powershell
+python scripts/scenario_benchmark.py --data "rice new one.xlsx" --output outputs/scenarios --evaluation-start 80
+```
+
 ## Repository layout
 
 ```text

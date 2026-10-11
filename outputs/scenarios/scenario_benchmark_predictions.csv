@@ -1,0 +1,208 @@
+scenario,model,target_idx,year,season,actual,forecast,error,feature_availability
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),80,1990,Yala,891.000000,938.765244,47.765244,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),80,1990,Yala,891.000000,827.342650,-63.657350,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),80,1990,Yala,891.000000,893.442272,2.442272,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),81,1990,Maha,1554.000000,1245.598446,-308.401554,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),81,1990,Maha,1554.000000,1397.262447,-156.737553,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),81,1990,Maha,1554.000000,1365.549629,-188.450371,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),82,1991,Yala,835.000000,827.922899,-7.077101,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),82,1991,Yala,835.000000,838.372017,3.372017,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),82,1991,Yala,835.000000,904.421990,69.421990,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),83,1991,Maha,1630.000000,1392.186232,-237.813768,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),83,1991,Maha,1630.000000,1545.554930,-84.445070,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),83,1991,Maha,1630.000000,1395.495487,-234.504513,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),84,1992,Yala,710.000000,570.176643,-139.823357,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),84,1992,Yala,710.000000,635.274146,-74.725854,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),84,1992,Yala,710.000000,781.753289,71.753289,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),85,1992,Maha,1692.000000,1438.421073,-253.578927,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),85,1992,Maha,1692.000000,1571.059593,-120.940407,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),85,1992,Maha,1692.000000,1410.866722,-281.133278,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),86,1993,Yala,878.000000,725.936575,-152.063425,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),86,1993,Yala,878.000000,713.607298,-164.392702,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),86,1993,Yala,878.000000,841.974195,-36.025805,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),87,1993,Maha,1670.000000,1532.596379,-137.403621,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),87,1993,Maha,1670.000000,1569.180947,-100.819053,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),87,1993,Maha,1670.000000,1442.885714,-227.114286,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),88,1994,Yala,1013.000000,924.973788,-88.026212,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),88,1994,Yala,1013.000000,840.716749,-172.283251,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),88,1994,Yala,1013.000000,887.548602,-125.451398,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),89,1994,Maha,1761.000000,1472.177949,-288.822051,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),89,1994,Maha,1761.000000,1601.122214,-159.877786,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),89,1994,Maha,1761.000000,1457.051151,-303.948849,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),90,1995,Yala,1049.000000,941.130877,-107.869123,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),90,1995,Yala,1049.000000,877.874836,-171.125164,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),90,1995,Yala,1049.000000,894.687207,-154.312793,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),91,1995,Maha,1331.000000,1097.743688,-233.256312,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),91,1995,Maha,1331.000000,1249.088947,-81.911053,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),91,1995,Maha,1331.000000,1326.314021,-4.685979,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),92,1996,Yala,730.000000,601.194580,-128.805420,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),92,1996,Yala,730.000000,649.616162,-80.383838,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),92,1996,Yala,730.000000,787.829360,57.829360,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),93,1996,Maha,1457.000000,1127.283759,-329.716241,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),93,1996,Maha,1457.000000,1172.156417,-284.843583,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),93,1996,Maha,1457.000000,1231.518255,-225.481745,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),94,1997,Yala,782.000000,580.358408,-201.641592,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),94,1997,Yala,782.000000,708.356961,-73.643039,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),94,1997,Yala,782.000000,798.385850,16.385850,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),95,1997,Maha,1781.000000,1556.856638,-224.143362,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),95,1997,Maha,1781.000000,1629.884146,-151.115854,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),95,1997,Maha,1781.000000,1494.180110,-286.819890,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),96,1998,Yala,911.000000,664.182939,-246.817061,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),96,1998,Yala,911.000000,711.573025,-199.426975,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),96,1998,Yala,911.000000,861.430051,-49.569949,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),97,1998,Maha,1736.000000,1440.849660,-295.150340,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),97,1998,Maha,1736.000000,1613.657243,-122.342757,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),97,1998,Maha,1736.000000,1508.156142,-227.843858,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),98,1999,Yala,1121.000000,901.396008,-219.603992,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),98,1999,Yala,1121.000000,886.154265,-234.845735,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),98,1999,Yala,1121.000000,930.626228,-190.373772,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),99,1999,Maha,1781.000000,1407.451338,-373.548662,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),99,1999,Maha,1781.000000,1649.208407,-131.791593,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),99,1999,Maha,1781.000000,1525.335582,-255.664418,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),100,2000,Yala,1079.000000,837.218274,-241.781726,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),100,2000,Yala,1079.000000,897.094791,-181.905209,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),100,2000,Yala,1079.000000,907.431024,-171.568976,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),101,2000,Maha,1613.000000,1205.433981,-407.566019,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),101,2000,Maha,1613.000000,1348.472198,-264.527802,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),101,2000,Maha,1613.000000,1319.985701,-293.014299,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),102,2001,Yala,1082.000000,879.708664,-202.291336,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),102,2001,Yala,1082.000000,895.447383,-186.552617,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),102,2001,Yala,1082.000000,910.406777,-171.593223,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),103,2001,Maha,1774.000000,1379.680456,-394.319544,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),103,2001,Maha,1774.000000,1475.020179,-298.979821,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),103,2001,Maha,1774.000000,1565.271885,-208.728115,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),104,2002,Yala,1086.000000,955.326890,-130.673110,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),104,2002,Yala,1086.000000,987.508772,-98.491228,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),104,2002,Yala,1086.000000,964.653211,-121.346789,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),105,2002,Maha,1895.000000,1654.856835,-240.143165,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),105,2002,Maha,1895.000000,1705.457283,-189.542717,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),105,2002,Maha,1895.000000,1601.158683,-293.841317,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),106,2003,Yala,1172.000000,1078.732839,-93.267161,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),106,2003,Yala,1172.000000,1004.527642,-167.472358,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),106,2003,Yala,1172.000000,993.432895,-178.567105,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),107,2003,Maha,1670.000000,1262.217571,-407.782429,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),107,2003,Maha,1670.000000,1538.760666,-131.239334,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),107,2003,Maha,1670.000000,1566.449901,-103.550099,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),108,2004,Yala,958.000000,594.372132,-363.627868,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),108,2004,Yala,958.000000,767.778520,-190.221480,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),108,2004,Yala,958.000000,859.971525,-98.028475,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),109,2004,Maha,2013.000000,1681.845579,-331.154421,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),109,2004,Maha,2013.000000,1738.067671,-274.932329,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),109,2004,Maha,2013.000000,1624.956335,-388.043665,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),110,2005,Yala,1233.000000,1094.125672,-138.874328,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),110,2005,Yala,1233.000000,1005.007780,-227.992220,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),110,2005,Yala,1233.000000,1029.334270,-203.665730,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),111,2005,Maha,2135.000000,1806.496708,-328.503292,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),111,2005,Maha,2135.000000,1750.971596,-384.028404,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),111,2005,Maha,2135.000000,1644.519034,-490.480966,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),112,2006,Yala,1206.000000,926.812353,-279.187647,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),112,2006,Yala,1206.000000,989.082946,-216.917054,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),112,2006,Yala,1206.000000,1028.953306,-177.046694,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),113,2006,Maha,1973.000000,1457.336093,-515.663907,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),113,2006,Maha,1973.000000,1640.113107,-332.886893,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),113,2006,Maha,1973.000000,1640.627065,-332.372935,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),114,2007,Yala,1158.000000,854.475551,-303.524449,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),114,2007,Yala,1158.000000,874.839590,-283.160410,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),114,2007,Yala,1158.000000,1038.324313,-119.675687,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),115,2007,Maha,2125.000000,1854.996044,-270.003956,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),115,2007,Maha,2125.000000,1825.621911,-299.378089,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),115,2007,Maha,2125.000000,1714.689909,-410.310091,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),116,2008,Yala,1750.000000,1819.882749,69.882749,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),116,2008,Yala,1750.000000,1537.042546,-212.957454,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),116,2008,Yala,1750.000000,1596.828078,-153.171922,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),117,2008,Maha,2384.000000,1978.906892,-405.093108,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),117,2008,Maha,2384.000000,1916.788770,-467.211230,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),117,2008,Maha,2384.000000,1759.684537,-624.315463,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),118,2009,Yala,1268.000000,990.376251,-277.623749,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),118,2009,Yala,1268.000000,1047.655409,-220.344591,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),118,2009,Yala,1268.000000,1104.840200,-163.159800,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),119,2009,Maha,2630.000000,2084.397876,-545.602124,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),119,2009,Maha,2630.000000,1977.854576,-652.145424,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),119,2009,Maha,2630.000000,1801.584968,-828.415032,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),120,2010,Yala,1671.000000,1464.752127,-206.247873,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),120,2010,Yala,1671.000000,1112.104670,-558.895330,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),120,2010,Yala,1671.000000,1168.879038,-502.120962,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),121,2010,Maha,1996.000000,2144.864280,148.864280,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),121,2010,Maha,1996.000000,2101.844782,105.844782,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),121,2010,Maha,1996.000000,1892.680495,-103.319505,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),122,2011,Yala,1898.000000,1850.603410,-47.396590,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),122,2011,Yala,1898.000000,1822.399821,-75.600179,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),122,2011,Yala,1898.000000,1744.838298,-153.161702,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),123,2011,Maha,2718.000000,2394.498024,-323.501976,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),123,2011,Maha,2718.000000,2126.019391,-591.980609,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),123,2011,Maha,2718.000000,1918.362728,-799.637272,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),124,2012,Yala,1129.000000,979.777959,-149.222041,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),124,2012,Yala,1129.000000,1116.708095,-12.291905,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),124,2012,Yala,1129.000000,1218.437533,89.437533,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),125,2012,Maha,2846.000000,2742.078962,-103.921038,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),125,2012,Maha,2846.000000,2236.853350,-609.146650,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),125,2012,Maha,2846.000000,1971.362925,-874.637075,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),126,2013,Yala,1774.000000,1659.660185,-114.339815,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),126,2013,Yala,1774.000000,1477.522878,-296.477122,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),126,2013,Yala,1774.000000,1593.804154,-180.195846,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),127,2013,Maha,2235.000000,1944.539698,-290.460302,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),127,2013,Maha,2235.000000,2313.885584,78.885584,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),127,2013,Maha,2235.000000,2042.193365,-192.806635,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),128,2014,Yala,1145.000000,879.261704,-265.738296,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),128,2014,Yala,1145.000000,1049.766759,-95.233241,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),128,2014,Yala,1145.000000,1192.900376,47.900376,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),129,2014,Maha,2877.000000,2724.189373,-152.810627,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),129,2014,Maha,2877.000000,2365.093407,-511.906593,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),129,2014,Maha,2877.000000,2087.955485,-789.044515,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),130,2015,Yala,1942.000000,1834.283945,-107.716055,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),130,2015,Yala,1942.000000,1777.295756,-164.704244,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),130,2015,Yala,1942.000000,1831.999826,-110.000174,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),131,2015,Maha,2903.000000,2710.155025,-192.844975,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),131,2015,Maha,2903.000000,2478.984333,-424.015667,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),131,2015,Maha,2903.000000,2152.165724,-750.834276,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),132,2016,Yala,1517.000000,1344.217133,-172.782867,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),132,2016,Yala,1517.000000,1174.623570,-342.376430,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),132,2016,Yala,1517.000000,1262.897398,-254.102602,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),133,2016,Maha,1474.000000,1047.212177,-426.787823,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),133,2016,Maha,1474.000000,1403.199892,-70.800108,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),133,2016,Maha,1474.000000,1364.013206,-109.986794,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),134,2017,Yala,909.000000,627.196658,-281.803342,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),134,2017,Yala,909.000000,900.399058,-8.600942,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),134,2017,Yala,909.000000,1143.767335,234.767335,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),135,2017,Maha,2397.000000,2205.086268,-191.913732,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),135,2017,Maha,2397.000000,2444.443930,47.443930,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),135,2017,Maha,2397.000000,2216.229120,-180.770880,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),136,2018,Yala,1533.000000,1326.882984,-206.117016,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),136,2018,Yala,1533.000000,1179.586147,-353.413853,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),136,2018,Yala,1533.000000,1212.683819,-320.316181,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),137,2018,Maha,3073.000000,2741.549990,-331.450010,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),137,2018,Maha,3073.000000,2580.344299,-492.655701,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),137,2018,Maha,3073.000000,2252.294955,-820.705045,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),138,2019,Yala,1519.000000,1228.334204,-290.665796,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),138,2019,Yala,1519.000000,1202.257971,-316.742029,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),138,2019,Yala,1519.000000,1288.176841,-230.823159,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),139,2019,Maha,3197.000000,2819.868196,-377.131804,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),139,2019,Maha,3197.000000,2670.571475,-526.428525,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),139,2019,Maha,3197.000000,2324.049200,-872.950800,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),140,2020,Yala,1924.000000,1851.080140,-72.919860,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),140,2020,Yala,1924.000000,1637.872549,-286.127451,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),140,2020,Yala,1924.000000,1884.747544,-39.252456,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),141,2020,Maha,3061.000000,3034.896224,-26.103776,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),141,2020,Maha,3061.000000,2745.485700,-315.514300,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),141,2020,Maha,3061.000000,2396.574868,-664.425132,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),142,2021,Yala,2088.000000,2165.879724,77.879724,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),142,2021,Yala,2088.000000,1847.921975,-240.078025,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),142,2021,Yala,2088.000000,2079.510811,-8.489189,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),143,2021,Maha,1931.000000,3040.320343,1109.320343,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),143,2021,Maha,1931.000000,2817.519328,886.519328,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),143,2021,Maha,1931.000000,2451.750846,520.750846,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),144,2022,Yala,1462.000000,1909.823098,447.823098,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),144,2022,Yala,1462.000000,1834.975017,372.975017,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),144,2022,Yala,1462.000000,1979.865381,517.865381,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),145,2022,Maha,2696.000000,3046.286358,350.286358,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),145,2022,Maha,2696.000000,2619.689751,-76.310249,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),145,2022,Maha,2696.000000,2411.352619,-284.647381,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),146,2023,Yala,1817.000000,2031.320255,214.320255,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),146,2023,Yala,1817.000000,1807.664475,-9.335525,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),146,2023,Yala,1817.000000,2040.217690,223.217690,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),147,2023,Maha,2709.000000,2997.647193,288.647193,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),147,2023,Maha,2709.000000,2701.497750,-7.502250,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),147,2023,Maha,2709.000000,2442.354137,-266.645863,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Ridge (realized season data),148,2024,Yala,2022.000000,2039.475305,17.475305,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast Random Forest (realized season data),148,2024,Yala,2022.000000,1829.797362,-192.202638,realized same-season covariates; after season close
+within_season_or_post_season_nowcast,Nowcast HistGradientBoosting (realized season data),148,2024,Yala,2022.000000,1987.538434,-34.461566,realized same-season covariates; after season close
