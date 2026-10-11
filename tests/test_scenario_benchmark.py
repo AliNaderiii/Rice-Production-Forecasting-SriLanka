@@ -1,5 +1,5 @@
-from rice_forecasting.scenario_benchmark import FEATURES
 from rice_forecasting.data import TARGET
+from rice_forecasting.scenario_benchmark import FEATURES
 
 
 def test_nowcast_predictors_exclude_target_and_are_explicit():
